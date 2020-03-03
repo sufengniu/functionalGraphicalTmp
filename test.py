@@ -58,7 +58,8 @@ def decoder(z=None, generate=False):
 
         symm_offdiagonal_theta = theta_mask * symm_theta
         
-        
+        beta_diagonal = tf.tile(tf.expand_dims(exp_lambda, axis=-1), [1,M])
+        theta_diagonal = tf.random.gamma([batch_size], alpha=1, beta=beta_diagonal)
         
         # obtain diagonal theta
         D = tf.zeros_like(theta)
